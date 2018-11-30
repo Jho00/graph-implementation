@@ -58,12 +58,6 @@ public class LoadGraphCommand extends AbstractCommand {
 
         }
 
-        for(int i = 0; i < AdjMatrix.getLength(); i++){
-            for(int j = 0; j < AdjMatrix.getLength(); j++){
-                System.out.print(AdjMatrix.getMatrix()[i][j]);
-            }
-            System.out.println(" ");
-        }
         return true;
     }
 
