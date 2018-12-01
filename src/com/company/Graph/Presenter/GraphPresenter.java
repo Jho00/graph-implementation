@@ -2,7 +2,8 @@ package com.company.Graph.Presenter;
 
 import com.company.Graph.Model.AdjMatrix;
 import com.company.Graph.Model.Entity.Command.AbstractCommand;
-import com.company.Graph.Model.Entity.Command.LoadGraphCommand;
+import com.company.Graph.Model.Entity.Command.LoadGraphListsCommand;
+import com.company.Graph.Model.Entity.Command.LoadGraphMatrixCommand;
 
 import com.company.Graph.Model.Entity.Exceptions.IllegalCommandException;
 import com.company.Graph.View.ConsoleViewWorker;
@@ -16,7 +17,8 @@ public class GraphPresenter {
 
     public GraphPresenter() {
         this.commands = new HashMap<>();
-        this.commands.put(1, new LoadGraphCommand(this));
+        this.commands.put(1, new LoadGraphMatrixCommand(this));
+        this.commands.put(2, new LoadGraphListsCommand(this));
     }
 
     public void runMenu() {
@@ -29,7 +31,12 @@ public class GraphPresenter {
                 ConsoleViewWorker.printErrorMessage(e.getMessage());
             }
 
-            Objects.requireNonNull(command).execute();
+            if(Objects.requireNonNull(command).execute()) {
+                this.printSuccessMessage();
+                continue;
+            }
+
+            ConsoleViewWorker.printErrorMessage("Что-то пошло не так, повторите попытку");
         }
     }
 
@@ -39,15 +46,22 @@ public class GraphPresenter {
             throw new IllegalCommandException("Неверная команда");
         }
         return  command;
-
     }
 
     public void printErrorMessage(String message) {
         ConsoleViewWorker.printErrorMessage(message);
     }
 
-    public String getPathToFile() {
-        return ConsoleViewWorker.getPathToFile();
+    public void printSuccessMessage() {
+        ConsoleViewWorker.printSuccessMessage();
+    }
+
+    public String getPathToMatrixFile() {
+        return ConsoleViewWorker.getPathToMatrixFile();
+    }
+
+    public String getPathToListsFile() {
+        return ConsoleViewWorker.getPathToListsFile();
     }
 
     public void printCurrentMatrix() {

@@ -12,18 +12,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadGraphCommand extends AbstractCommand {
+public class LoadGraphMatrixCommand extends AbstractCommand {
     private GraphPresenter presenter;
 
     private File file;
     private FileReader reader;
     private List<Integer> lineOfMatrix;
-    private int[][] gettedMatrix;
+    private double[][] gettedMatrix;
     private boolean isFirstLine;
     private int lastIndex;
 
 
-    public LoadGraphCommand(GraphPresenter presenter)  {
+    public LoadGraphMatrixCommand(GraphPresenter presenter)  {
         this.presenter = presenter;
     }
 
@@ -61,13 +61,12 @@ public class LoadGraphCommand extends AbstractCommand {
 
         }
 
-
-
         return true;
     }
 
     private void prepeareToread() throws IllegalPathToGraph {
-        file = new File(presenter.getPathToFile());
+        file = new File(presenter.getPathToListsFile());
+
         if(!this.isValidPath(this.file)) {
             throw new IllegalPathToGraph("Путь до файла неверный");
         }
@@ -84,7 +83,7 @@ public class LoadGraphCommand extends AbstractCommand {
     }
 
     private void createMatrixArray(int len) {
-        this.gettedMatrix = new int[len][len];
+        this.gettedMatrix = new double[len][len];
     }
 
     private void createNextLine() {
@@ -96,7 +95,4 @@ public class LoadGraphCommand extends AbstractCommand {
         this.lastIndex++;
     }
 
-    private boolean isValidPath(File file) {
-        return file.exists();
-    }
 }

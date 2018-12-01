@@ -1,13 +1,13 @@
 package com.company.Graph.Model;
 
 public class AdjMatrix {
-    private static int[][] matrix;
+    private static double[][] matrix;
 
-    public static void load(int[][] adjMatrix) {
+    public static void load(double[][] adjMatrix) {
         matrix = adjMatrix;
     }
 
-    public static int[][] getMatrix() {
+    public static double[][] getMatrix() {
         return matrix;
     }
 
