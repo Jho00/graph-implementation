@@ -2,6 +2,8 @@ package com.company.Graph.Model.Entity.Command;
 
 
 import com.company.Graph.Model.AdjMatrix;
+import com.company.Graph.Model.Entity.Exceptions.IllegalPathToGraph;
+import com.company.Graph.Presenter.GraphPresenter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadGraphCommand extends AbstractCommand {
+    private GraphPresenter presenter;
+
     private File file;
     private FileReader reader;
     private List<Integer> lineOfMatrix;
@@ -19,20 +23,19 @@ public class LoadGraphCommand extends AbstractCommand {
     private int lastIndex;
 
 
-    public LoadGraphCommand(String pathToFile) {
-        this.file = new File(pathToFile);
-        try {
-            this.reader = new FileReader(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); // Всегда существует
-        }
-        this.lineOfMatrix = new ArrayList<>();
-        this.isFirstLine = true;
-        this.lastIndex = 0;
+    public LoadGraphCommand(GraphPresenter presenter)  {
+        this.presenter = presenter;
     }
 
     @Override
     public boolean execute() {
+        try {
+            this.prepeareToread();
+        } catch (IllegalPathToGraph e) {
+            presenter.printErrorMessage(e.getMessage());
+            return false;
+        }
+
         int c;
         while(true){
             try {
@@ -58,7 +61,26 @@ public class LoadGraphCommand extends AbstractCommand {
 
         }
 
+
+
         return true;
+    }
+
+    private void prepeareToread() throws IllegalPathToGraph {
+        file = new File(presenter.getPathToFile());
+        if(!this.isValidPath(this.file)) {
+            throw new IllegalPathToGraph("Путь до файла неверный");
+        }
+
+        try {
+            this.reader = new FileReader(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace(); // Всегда существует
+        }
+
+        this.lineOfMatrix = new ArrayList<>();
+        this.isFirstLine = true;
+        this.lastIndex = 0;
     }
 
     private void createMatrixArray(int len) {
@@ -72,5 +94,9 @@ public class LoadGraphCommand extends AbstractCommand {
             i[0]++;
         });
         this.lastIndex++;
+    }
+
+    private boolean isValidPath(File file) {
+        return file.exists();
     }
 }

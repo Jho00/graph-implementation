@@ -1,5 +1,7 @@
 package com.company.Graph.View;
 
+import com.company.Graph.Model.AdjMatrix;
+
 import java.util.Scanner;
 
 public class ConsoleViewWorker {
@@ -27,5 +29,13 @@ public class ConsoleViewWorker {
 
     public static void printErrorMessage(String message) {
         System.out.println(message);
+    }
+
+    public static void printMatrixChar(int i) {
+        System.out.print(i);
+    }
+
+    public static void printNewLine() {
+        System.out.println(" ");
     }
 }

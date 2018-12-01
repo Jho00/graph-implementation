@@ -1,46 +1,61 @@
 package com.company.Graph.Presenter;
 
+import com.company.Graph.Model.AdjMatrix;
 import com.company.Graph.Model.Entity.Command.AbstractCommand;
 import com.company.Graph.Model.Entity.Command.LoadGraphCommand;
+
 import com.company.Graph.Model.Entity.Exceptions.IllegalCommandException;
-import com.company.Graph.Model.Entity.Exceptions.IllegalPathToGraph;
 import com.company.Graph.View.ConsoleViewWorker;
 
-import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class GraphPresenter {
+    private Map<Integer, AbstractCommand> commands;
+
+    public GraphPresenter() {
+        this.commands = new HashMap<>();
+        this.commands.put(1, new LoadGraphCommand(this));
+    }
+
     public void runMenu() {
         while (true) {
             ConsoleViewWorker.printFirstMenu();
+            AbstractCommand command = null;
             try {
-                AbstractCommand command = this.getCommand(ConsoleViewWorker.getGeneralAction());
-                if(!command.execute()) {
-                    ConsoleViewWorker.printErrorMessage("Произошла незивестная ошибка, повторите дейтсвие");
-                }
-            } catch (IllegalCommandException | IllegalPathToGraph e) {
-               ConsoleViewWorker.printErrorMessage(e.getMessage());
+                command = this.getCommand(ConsoleViewWorker.getGeneralAction());
+            } catch (IllegalCommandException e) {
+                ConsoleViewWorker.printErrorMessage(e.getMessage());
             }
+
+            Objects.requireNonNull(command).execute();
         }
     }
 
-    private AbstractCommand getCommand(int action) throws IllegalCommandException, IllegalPathToGraph {
-        switch (action) {
-            case 1 : return this.getLoadGraphCommand();
-            default: throw new IllegalCommandException("Неверная команда");
+    private AbstractCommand getCommand(int action) throws IllegalCommandException {
+        AbstractCommand command = this.commands.get(action);
+        if(command == null) {
+            throw new IllegalCommandException("Неверная команда");
         }
+        return  command;
+
     }
 
-    private LoadGraphCommand getLoadGraphCommand() throws IllegalPathToGraph {
-        String path = ConsoleViewWorker.getPathToFile();
-        if(this.validatePath(path)) {
-            return new LoadGraphCommand(path);
-        }
-
-        throw new IllegalPathToGraph("Такого файла не существует");
+    public void printErrorMessage(String message) {
+        ConsoleViewWorker.printErrorMessage(message);
     }
 
-    private boolean validatePath(String path) {
-        File file = new File(path);
-        return file.exists();
+    public String getPathToFile() {
+        return ConsoleViewWorker.getPathToFile();
+    }
+
+    public void printCurrentMatrix() {
+        for(int i = 0; i < AdjMatrix.getLength(); i++) {
+            for(int j = 0; j < AdjMatrix.getLength(); j++) {
+                ConsoleViewWorker.printMatrixChar(AdjMatrix.getMatrix()[i][j]);
+            }
+            ConsoleViewWorker.printNewLine();
+        }
     }
 }
