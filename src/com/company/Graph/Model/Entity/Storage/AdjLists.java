@@ -1,6 +1,7 @@
-package com.company.Graph.Model;
+package com.company.Graph.Model.Entity.Storage;
 
 import com.company.Graph.Model.Entity.Exceptions.NodeNotFoundException;
+import com.company.Graph.Model.Common.Node;
 
 import java.util.List;
 

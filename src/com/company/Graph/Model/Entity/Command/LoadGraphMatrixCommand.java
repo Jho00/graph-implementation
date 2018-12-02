@@ -1,24 +1,20 @@
 package com.company.Graph.Model.Entity.Command;
 
 
-import com.company.Graph.Model.AdjMatrix;
+import com.company.Graph.Model.Entity.Storage.AdjMatrix;
+import com.company.Graph.Model.Entity.Command.Base.AbstractLoadCommand;
 import com.company.Graph.Model.Entity.Exceptions.IllegalPathToGraph;
 import com.company.Graph.Presenter.GraphPresenter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadGraphMatrixCommand extends AbstractCommand {
-    private GraphPresenter presenter;
+public class LoadGraphMatrixCommand extends AbstractLoadCommand {
 
-    private File file;
-    private FileReader reader;
     private List<Integer> lineOfMatrix;
-    private double[][] gettedMatrix;
+    private int[][] gettedMatrix;
     private boolean isFirstLine;
     private int lastIndex;
 
@@ -61,21 +57,15 @@ public class LoadGraphMatrixCommand extends AbstractCommand {
 
         }
 
+        this.presenter.printCurrentMatrix();
+
         return true;
     }
 
     private void prepeareToread() throws IllegalPathToGraph {
-        file = new File(presenter.getPathToListsFile());
+        this.file = new File(presenter.getPathToListsFile());
 
-        if(!this.isValidPath(this.file)) {
-            throw new IllegalPathToGraph("Путь до файла неверный");
-        }
-
-        try {
-            this.reader = new FileReader(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); // Всегда существует
-        }
+        this.prepareReader();
 
         this.lineOfMatrix = new ArrayList<>();
         this.isFirstLine = true;
@@ -83,7 +73,7 @@ public class LoadGraphMatrixCommand extends AbstractCommand {
     }
 
     private void createMatrixArray(int len) {
-        this.gettedMatrix = new double[len][len];
+        this.gettedMatrix = new int[len][len];
     }
 
     private void createNextLine() {

@@ -1,7 +1,7 @@
 package com.company.Graph.Presenter;
 
-import com.company.Graph.Model.AdjMatrix;
-import com.company.Graph.Model.Entity.Command.AbstractCommand;
+import com.company.Graph.Model.Entity.Storage.AdjMatrix;
+import com.company.Graph.Model.Entity.Command.Base.AbstractCommand;
 import com.company.Graph.Model.Entity.Command.LoadGraphListsCommand;
 import com.company.Graph.Model.Entity.Command.LoadGraphMatrixCommand;
 

@@ -1,10 +1,10 @@
-package com.company.Graph.Model;
+package com.company.Graph.Model.Common;
 
 import java.util.*;
 
 public class Node {
     private int id;
-    private List<Map<Integer,Double>> adjacencyList;
+    private List<Map<Integer, Double>> adjacencyList;
 
     public Node(int id) {
         this.id = id;
@@ -25,12 +25,12 @@ public class Node {
 
     @Override
     public int hashCode() {
-        return id *42;
+        return id * 42;
     }
 
     public void addAdjacency(int id, double weight) {
-        Map<Integer,Double> adj = new HashMap<>();
-        adj.put(id,weight);
+        Map<Integer, Double> adj = new HashMap<>();
+        adj.put(id, weight);
         this.adjacencyList.add(adj);
     }
 
