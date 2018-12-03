@@ -1,5 +1,6 @@
 package com.company.Graph.Presenter;
 
+import com.company.Graph.Model.Entity.Storage.AdjLists;
 import com.company.Graph.Model.Entity.Storage.AdjMatrix;
 import com.company.Graph.Model.Entity.Command.Base.AbstractCommand;
 import com.company.Graph.Model.Entity.Command.LoadGraphListsCommand;
@@ -59,7 +60,6 @@ public class GraphPresenter {
     public String getPathToMatrixFile() {
         return ConsoleViewWorker.getPathToMatrixFile();
     }
-
     public String getPathToListsFile() {
         return ConsoleViewWorker.getPathToListsFile();
     }
@@ -71,5 +71,16 @@ public class GraphPresenter {
             }
             ConsoleViewWorker.printNewLine();
         }
+    }
+
+    public void printCurrnetLists() {
+        AdjLists.getLists().forEach(item -> {
+            ConsoleViewWorker.printLine("Вершина " + item.getId());
+            item.getAdjacencyList().forEach(adjItem -> {
+                ConsoleViewWorker.printLine(adjItem.getNode() + " " + adjItem.getWeight());
+            });
+
+            ConsoleViewWorker.printDelimiter();
+        });
     }
 }

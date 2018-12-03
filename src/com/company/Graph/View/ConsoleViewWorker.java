@@ -46,4 +46,12 @@ public class ConsoleViewWorker {
     public static void printSuccessMessage() {
         System.out.println("Операция выполнена успешно!");
     }
+
+    public static void printLine(String line) {
+        System.out.println(line);
+    }
+
+    public static void printDelimiter() {
+        System.out.println("--------------------");
+    }
 }

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Node {
     private int id;
-    private List<Map<Integer, Double>> adjacencyList;
+    private List<Adjency<Integer, Integer>> adjacencyList;
 
     public Node(int id) {
         this.id = id;
@@ -20,7 +20,7 @@ public class Node {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return id == node.id;
+        return id == node.getId();
     }
 
     @Override
@@ -28,10 +28,12 @@ public class Node {
         return id * 42;
     }
 
-    public void addAdjacency(int id, double weight) {
-        Map<Integer, Double> adj = new HashMap<>();
-        adj.put(id, weight);
+    public void addAdjacency(int id, int weight) {
+        Adjency<Integer, Integer> adj = new Adjency<>(id, weight);
         this.adjacencyList.add(adj);
     }
 
+    public List<Adjency<Integer, Integer>> getAdjacencyList() {
+        return adjacencyList;
+    }
 }
