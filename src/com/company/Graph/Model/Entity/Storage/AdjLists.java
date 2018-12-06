@@ -40,4 +40,5 @@ public class AdjLists {
             lists.add(node);
         }
     }
+
 }

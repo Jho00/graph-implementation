@@ -63,7 +63,7 @@ public class LoadGraphMatrixCommand extends AbstractLoadCommand {
     }
 
     private void prepeareToread() throws IllegalPathToGraph {
-        this.file = new File(presenter.getPathToListsFile());
+        this.file = new File(presenter.getPathToMatrixFile());
 
         this.prepareReader();
 
