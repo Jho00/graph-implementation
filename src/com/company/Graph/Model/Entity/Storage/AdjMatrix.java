@@ -37,4 +37,8 @@ public class AdjMatrix {
             }
         }
     }
+
+    public static boolean isNodesHaveAdjency(int firstId, int secondId) {
+        return matrix[firstId][secondId] > 0;
+    }
 }

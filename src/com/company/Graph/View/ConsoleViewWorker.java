@@ -25,6 +25,10 @@ public class ConsoleViewWorker {
         System.out.println("8. Удалить ребро");
         System.out.println("9. Узнать количество вершин");
         System.out.println("10. Узнать количество ребер");
+        System.out.println("11. Узнать смежны ли 2 вершины");
+        System.out.println("12. Узнать вес 2 вершин");
+        System.out.println("13. Кол-во пар с 2-вершинным циклом");
+        System.out.println("14. Закончить программу");
     }
 
     public static int getGeneralAction() {

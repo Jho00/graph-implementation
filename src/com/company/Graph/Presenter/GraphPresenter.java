@@ -1,5 +1,6 @@
 package com.company.Graph.Presenter;
 
+import com.company.Graph.Model.Entity.CloseProgrammCommand;
 import com.company.Graph.Model.Entity.Command.*;
 import com.company.Graph.Model.Entity.Storage.AdjLists;
 import com.company.Graph.Model.Entity.Storage.AdjMatrix;
@@ -27,6 +28,11 @@ public class GraphPresenter {
         this.commands.put(8, new DeleteAdjencyCommand(this));
         this.commands.put(9, new PrintNodesCountCommand(this));
         this.commands.put(10, new PrintAdjencyCountCommand(this));
+        this.commands.put(11, new PrintNodeHaveAdjencyCommand(this));
+        this.commands.put(12, new PrintAdjencyWeight(this));
+        this.commands.put(13, new CountDoubleNodeCycleCommand(this));
+        this.commands.put(14, new CloseProgrammCommand(this));
+
     }
 
     public void runMenu() {
