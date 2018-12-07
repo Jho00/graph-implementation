@@ -32,7 +32,7 @@ public class LoadGraphMatrixCommand extends AbstractLoadCommand {
         try {
             this.prepeareToread();
         } catch (IllegalPathToGraph e) {
-            presenter.printErrorMessage(e.getMessage());
+            presenter.printMessage(e.getMessage());
             return false;
         }
 
@@ -64,7 +64,7 @@ public class LoadGraphMatrixCommand extends AbstractLoadCommand {
         try {
             AdjMatrix.replicateToLists();
         } catch (NodeNotFoundException e) {
-            presenter.printErrorMessage(e.getMessage());
+            presenter.printMessage(e.getMessage());
         }
 
         return true;

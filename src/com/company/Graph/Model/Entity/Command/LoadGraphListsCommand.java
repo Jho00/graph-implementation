@@ -27,7 +27,7 @@ public class LoadGraphListsCommand extends AbstractLoadCommand {
         try {
             this.prepareToRead();
         } catch (IllegalPathToGraph e) {
-            presenter.printErrorMessage(e.getMessage());
+            presenter.printMessage(e.getMessage());
             return false;
         }
 
@@ -86,7 +86,7 @@ public class LoadGraphListsCommand extends AbstractLoadCommand {
             node.addAdjacency(line.get(1), line.get(2));
             line = new ArrayList<>();
         } catch (NodeNotFoundException e) {
-            presenter.printErrorMessage(e.getMessage());
+            presenter.printMessage(e.getMessage());
         }
     }
 

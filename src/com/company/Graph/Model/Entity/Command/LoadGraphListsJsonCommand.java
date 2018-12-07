@@ -25,7 +25,7 @@ public class LoadGraphListsJsonCommand extends AbstractLoadCommand {
         try {
             this.prepareToRead();
         } catch (IllegalPathToGraph e) {
-            presenter.printErrorMessage(e.getMessage());
+            presenter.printMessage(e.getMessage());
             return false;
         }
 
@@ -40,11 +40,11 @@ public class LoadGraphListsJsonCommand extends AbstractLoadCommand {
                 try {
                     this.createNextAdj(current.get(0),  current.get(1), current.get(2));
                 } catch (NodeNotFoundException e) {
-                    presenter.printErrorMessage(e.getMessage());
+                    presenter.printMessage(e.getMessage());
                 }
             });
         } catch (IOException | ParseException e) {
-           presenter.printErrorMessage(e.getMessage());
+           presenter.printMessage(e.getMessage());
         }
 
         AdjLists.replicateToMatrix();

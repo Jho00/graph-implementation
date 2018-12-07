@@ -9,14 +9,22 @@ public class ConsoleViewWorker {
         scanner = new Scanner(System.in);
     }
 
-    public static void printFirstMenu() {
+    public static void printWelcomeMessage() {
         System.out.println("Добро пожаловать в программу по работе с графами.");
+    }
+
+    public static void printFirstMenu() {
         System.out.println("Меню:");
         System.out.println("1. Загрузить граф ( талица смежности )");
         System.out.println("2. Загрузить граф ( списки смежности )");
         System.out.println("3. Сохранить граф в файл( таблица смежности )");
         System.out.println("4. Загрузить граф в файл( списки смежности )");
         System.out.println("5. Создать пустой граф");
+        System.out.println("6. Добавить вершину");
+        System.out.println("7. Добавить ребро");
+        System.out.println("8. Удалить ребро");
+        System.out.println("9. Узнать количество вершин");
+        System.out.println("10. Узнать количество ребер");
     }
 
     public static int getGeneralAction() {
@@ -39,7 +47,7 @@ public class ConsoleViewWorker {
         return scanner.next();
     }
 
-    public static void printErrorMessage(String message) {
+    public static void printMessage(String message) {
         System.out.println(message);
     }
 
@@ -61,5 +69,14 @@ public class ConsoleViewWorker {
 
     public static void printDelimiter() {
         System.out.println("--------------------");
+    }
+
+    public static int getNextInt() {
+        return scanner.nextInt();
+    }
+
+    public static int getNextInt(String message) {
+        System.out.print(message);
+        return getNextInt();
     }
 }

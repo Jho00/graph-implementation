@@ -1,6 +1,5 @@
 package com.company.Graph.Model.Entity.Command;
 
-import com.company.Graph.Model.Entity.Command.Base.AbstractCommand;
 import com.company.Graph.Model.Entity.Command.Base.AbstractWriteCommand;
 import com.company.Graph.Model.Entity.Storage.AdjLists;
 import com.company.Graph.Model.Entity.Storage.AdjMatrix;
@@ -8,7 +7,6 @@ import com.company.Graph.Presenter.GraphPresenter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class SaveListsCommand extends AbstractWriteCommand {
@@ -43,12 +41,12 @@ public class SaveListsCommand extends AbstractWriteCommand {
                 writer.close();
 
             } catch (NullPointerException e) {
-                presenter.printErrorMessage("В программу не загружен ни один граф. Загрузите граф или создайте пустой!");
+                presenter.printMessage("В программу не загружен ни один граф. Загрузите граф или создайте пустой!");
                 return false;
             }
 
         } catch (IOException e) {
-            presenter.printErrorMessage(e.getMessage());
+            presenter.printMessage(e.getMessage());
             return false;
         }
         return true;

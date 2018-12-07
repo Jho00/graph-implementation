@@ -1,5 +1,6 @@
 package com.company.Graph.Model.Entity.Command.Base;
 
+import com.company.Graph.Model.Entity.Storage.AdjMatrix;
 import com.company.Graph.Presenter.GraphPresenter;
 
 public abstract class AbstractCommand  {
@@ -10,4 +11,8 @@ public abstract class AbstractCommand  {
     }
 
     public abstract boolean execute();
+
+    protected boolean isValidId(int id) {
+        return AdjMatrix.getLength() >= id;
+    }
 }

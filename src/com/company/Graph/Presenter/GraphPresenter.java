@@ -22,16 +22,22 @@ public class GraphPresenter {
         this.commands.put(3, new SaveMatrixCommand(this));
         this.commands.put(4, new SaveListsCommand(this));
         this.commands.put(5, new CreateEmptyGraphCommand(this));
+        this.commands.put(6, new AddNodeCommand(this));
+        this.commands.put(7, new AddAdjencyCommand(this));
+        this.commands.put(8, new DeleteAdjencyCommand(this));
+        this.commands.put(9, new PrintNodesCountCommand(this));
+        this.commands.put(10, new PrintAdjencyCountCommand(this));
     }
 
     public void runMenu() {
+        ConsoleViewWorker.printWelcomeMessage();
         while (true) {
             ConsoleViewWorker.printFirstMenu();
             AbstractCommand command = null;
             try {
                 command = this.getCommand(ConsoleViewWorker.getGeneralAction());
             } catch (IllegalCommandException e) {
-                ConsoleViewWorker.printErrorMessage(e.getMessage());
+                ConsoleViewWorker.printMessage(e.getMessage());
             }
 
             if(Objects.requireNonNull(command).execute()) {
@@ -39,7 +45,7 @@ public class GraphPresenter {
                 continue;
             }
 
-            ConsoleViewWorker.printErrorMessage("Что-то пошло не так, повторите попытку");
+            ConsoleViewWorker.printMessage("Что-то пошло не так, повторите попытку");
         }
     }
 
@@ -51,8 +57,12 @@ public class GraphPresenter {
         return  command;
     }
 
-    public void printErrorMessage(String message) {
-        ConsoleViewWorker.printErrorMessage(message);
+    public int getNextInt(String message) {
+        return ConsoleViewWorker.getNextInt(message);
+    }
+
+    public void printMessage(String message) {
+        ConsoleViewWorker.printMessage(message);
     }
 
     public void printSuccessMessage() {
@@ -72,7 +82,7 @@ public class GraphPresenter {
     public void printCurrentMatrix() {
         int len = AdjMatrix.getLength();
         if(len == 0) {
-            printErrorMessage("Граф пуст");
+            printMessage("Граф пуст");
         }
         for(int i = 0; i < len; i++) {
             for(int j = 0; j < len; j++) {
@@ -85,7 +95,7 @@ public class GraphPresenter {
     public void printCurrnetLists() {
         var lists = AdjLists.getLists();
         if(lists.size() == 0) {
-            printErrorMessage("Граф пуст");
+            printMessage("Граф пуст");
         }
         lists.forEach(item -> {
             ConsoleViewWorker.printLine("Вершина " + item.getId());

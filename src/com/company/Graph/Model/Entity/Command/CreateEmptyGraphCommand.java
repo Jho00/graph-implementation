@@ -15,7 +15,7 @@ public class CreateEmptyGraphCommand extends AbstractCommand {
     @Override
     public boolean execute() {
         AdjLists.setLists(new ArrayList<>());
-        AdjLists.replicateToMatrix();
+        AdjMatrix.load(new int[0][0]);
         return true;
     }
 }
