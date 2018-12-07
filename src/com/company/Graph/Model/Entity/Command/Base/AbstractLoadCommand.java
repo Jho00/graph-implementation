@@ -1,6 +1,7 @@
 package com.company.Graph.Model.Entity.Command.Base;
 
 import com.company.Graph.Model.Entity.Exceptions.IllegalPathToGraph;
+import com.company.Graph.Presenter.GraphPresenter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +10,10 @@ import java.io.FileReader;
 public abstract class AbstractLoadCommand extends AbstractCommand {
     protected File file;
     protected FileReader reader;
+
+    public AbstractLoadCommand(GraphPresenter presenter) {
+        super(presenter);
+    }
 
     private boolean isValidPath(File file) {
         return file.exists();

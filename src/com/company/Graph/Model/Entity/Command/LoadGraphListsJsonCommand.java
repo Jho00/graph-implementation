@@ -16,10 +16,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class LoadGraphListsJsonCommand extends AbstractLoadCommand {
-    private GraphPresenter presenter;
-
     public LoadGraphListsJsonCommand(GraphPresenter presenter) {
-        this.presenter = presenter;
+        super(presenter);
     }
 
     @Override

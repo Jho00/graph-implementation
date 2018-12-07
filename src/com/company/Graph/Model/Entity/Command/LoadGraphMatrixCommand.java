@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Старый метод парсинг списков смежности, не используется сейчас
+ */
 public class LoadGraphMatrixCommand extends AbstractLoadCommand {
 
     private List<Integer> lineOfMatrix;
@@ -21,7 +24,7 @@ public class LoadGraphMatrixCommand extends AbstractLoadCommand {
 
 
     public LoadGraphMatrixCommand(GraphPresenter presenter)  {
-        this.presenter = presenter;
+        super(presenter);
     }
 
     @Override
@@ -64,8 +67,6 @@ public class LoadGraphMatrixCommand extends AbstractLoadCommand {
             presenter.printErrorMessage(e.getMessage());
         }
 
-//        presenter.printCurrentMatrix();
-        presenter.printCurrnetLists();
         return true;
     }
 

@@ -17,7 +17,7 @@ public class LoadGraphListsCommand extends AbstractLoadCommand {
     private List<Integer> line;
 
     public LoadGraphListsCommand(GraphPresenter presenter) {
-        this.presenter = presenter;
+        super(presenter);
         this.isFirstLine = true;
         this.line = new ArrayList<>();
     }
