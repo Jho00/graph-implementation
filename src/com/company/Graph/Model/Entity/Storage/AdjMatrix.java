@@ -22,18 +22,17 @@ public class AdjMatrix {
     }
 
     public static void replicateToLists() throws NodeNotFoundException {
-        List<Node> nodes = new ArrayList<>();
+        List<Node> nodes = AdjLists.getLists();
         for(int i = 1; i <= AdjMatrix.getLength(); i++) {
             nodes.add(new Node(i));
         }
         AdjLists.setLists(nodes);
-
         for(int i = 0; i < getLength(); i++) {
             for(int j = 0; j < getLength(); j++) {
                     int weight = matrix [i][j];
                     if(weight >= 1) {
-                        Node node = AdjLists.getNodeById(i);
-                        node.addAdjacency(j,weight);
+                        Node node = AdjLists.getNodeById(i + 1);
+                        node.addAdjacency(j + 1,weight);
                     }
             }
         }

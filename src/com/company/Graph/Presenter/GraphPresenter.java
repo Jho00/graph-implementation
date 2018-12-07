@@ -1,5 +1,6 @@
 package com.company.Graph.Presenter;
 
+import com.company.Graph.Model.Entity.Command.LoadGraphListsJsonCommand;
 import com.company.Graph.Model.Entity.Storage.AdjLists;
 import com.company.Graph.Model.Entity.Storage.AdjMatrix;
 import com.company.Graph.Model.Entity.Command.Base.AbstractCommand;
@@ -19,7 +20,7 @@ public class GraphPresenter {
     public GraphPresenter() {
         this.commands = new HashMap<>();
         this.commands.put(1, new LoadGraphMatrixCommand(this));
-        this.commands.put(2, new LoadGraphListsCommand(this));
+        this.commands.put(2, new LoadGraphListsJsonCommand(this));
     }
 
     public void runMenu() {

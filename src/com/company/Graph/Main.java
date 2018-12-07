@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         presenter = new GraphPresenter();
         presenter.runMenu();
+
     }
 
 }

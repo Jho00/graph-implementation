@@ -1,6 +1,7 @@
 package com.company.Graph.Model.Entity.Command;
 
 
+import com.company.Graph.Model.Entity.Exceptions.NodeNotFoundException;
 import com.company.Graph.Model.Entity.Storage.AdjMatrix;
 import com.company.Graph.Model.Entity.Command.Base.AbstractLoadCommand;
 import com.company.Graph.Model.Entity.Exceptions.IllegalPathToGraph;
@@ -57,8 +58,14 @@ public class LoadGraphMatrixCommand extends AbstractLoadCommand {
 
         }
 
-        this.presenter.printCurrentMatrix();
+        try {
+            AdjMatrix.replicateToLists();
+        } catch (NodeNotFoundException e) {
+            presenter.printErrorMessage(e.getMessage());
+        }
 
+//        presenter.printCurrentMatrix();
+        presenter.printCurrnetLists();
         return true;
     }
 

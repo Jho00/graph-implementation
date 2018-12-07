@@ -46,18 +46,17 @@ public class AdjLists {
         int [][] matrix = new int[size][size];
         for(int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                matrix[i][j] = -1;
+                matrix[i][j] = 0;
             }
         }
-
 
         lists.forEach(item -> {
             int id = item.getId();
             var list = item.getAdjacencyList();
-            list.forEach(adjItem -> {
-               matrix[id][adjItem.getNode()] = adjItem.getWeight();
-            });
+            list.forEach(adjItem -> matrix[id -1][adjItem.getNode()-1] = adjItem.getWeight());
         });
+
+        AdjMatrix.load(matrix);
     }
 
 }

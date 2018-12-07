@@ -64,7 +64,7 @@ public class LoadGraphListsCommand extends AbstractLoadCommand {
 
         }
 
-        presenter.printCurrnetLists();
+        AdjLists.replicateToMatrix();
         return true;
     }
 
